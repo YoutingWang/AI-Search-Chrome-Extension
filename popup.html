@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>AI Search</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 头部 -->
+    <div class="header">
+      <div class="logo">
+        <span class="icon">✨</span>
+        <h1>AI Search</h1>
+      </div>
+      <button id="settingsBtn" class="settings-btn" title="设置">⚙️</button>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div id="mainContent" class="main-content">
+      
+      <!-- 欢迎界面 -->
+      <div id="welcomeScreen" class="welcome-screen">
+        <div class="welcome-icon">🔍</div>
+        <h2>欢迎使用AI Search</h2>
+        <p>在任意网页选中文本，点击"✨ AI Search"按钮即可获得智能分析</p>
+        
+        <!-- API Key设置提示 -->
+        <div class="api-key-prompt">
+          <h3>🔑 首次使用需要设置API Key</h3>
+          <button id="setupApiKeyBtn" class="setup-btn">设置OpenAI API Key</button>
+          <p><small>需要OpenAI账号和API Key才能使用</small></p>
+        </div>
+        
+        <div class="tips">
+          <h3>使用提示：</h3>
+          <ul>
+            <li>选中您想了解的文本内容</li>
+            <li>点击悬浮的"✨ AI Search"按钮</li>
+            <li>在此查看分析结果并可继续提问</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 分析结果展示 -->
+      <div id="resultScreen" class="result-screen" style="display: none;">
+        
+        <!-- 原始文本 -->
+        <div class="original-text">
+          <h3>📄 选中的内容</h3>
+          <div id="originalText" class="text-content"></div>
+          <button id="copyOriginalBtn" class="copy-btn" title="复制原文">📋</button>
+        </div>
+
+        <!-- AI分析结果 -->
+        <div class="analysis-result">
+          <h3>🤖 AI Search</h3>
+          <div id="analysisResult" class="text-content markdown-content"></div>
+          <button id="copyResultBtn" class="copy-btn" title="复制解读">📋</button>
+        </div>
+
+        <!-- 继续提问区域 -->
+        <div class="follow-up">
+          <h4>💬 继续提问</h4>
+          <div class="input-group">
+            <textarea 
+              id="followUpInput" 
+              placeholder="您还想了解什么？例如：请详细解释一下...、这个概念的应用场景有哪些..."
+              rows="3"
+            ></textarea>
+            <button id="sendBtn" class="send-btn">
+              <span class="btn-text">发送</span>
+              <span class="btn-loading" style="display: none;">⏳</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 对话历史 -->
+        <div id="conversationHistory" class="conversation-history" style="display: none;">
+          <h4>💭 对话记录</h4>
+          <div id="historyContent" class="history-content"></div>
+        </div>
+
+      </div>
+
+      <!-- 加载状态 -->
+      <div id="loadingScreen" class="loading-screen" style="display: none;">
+        <div class="loading-spinner">🔄</div>
+        <p>AI正在分析中...</p>
+      </div>
+
+      <!-- 错误状态 -->
+      <div id="errorScreen" class="error-screen" style="display: none;">
+        <div class="error-icon">❌</div>
+        <h3>分析失败</h3>
+        <p id="errorMessage">请稍后重试</p>
+        <button id="retryBtn" class="retry-btn">重试</button>
+      </div>
+
+    </div>
+
+    <!-- 设置面板 -->
+    <div id="settingsPanel" class="settings-panel" style="display: none;">
+      <div class="settings-header">
+        <h3>⚙️ 设置</h3>
+        <button id="closeSettingsBtn" class="close-btn">✕</button>
+      </div>
+      
+      <div class="settings-content">
+        <div class="setting-item">
+          <label for="apiKeyInput">OpenAI API Key:</label>
+          <div class="input-group">
+            <input 
+              type="password" 
+              id="apiKeyInput" 
+              placeholder="sk-..." 
+              autocomplete="off"
+            >
+            <button id="saveApiKeyBtn" class="save-btn">保存</button>
+          </div>
+          <small class="help-text">
+            您的API Key将安全存储在本地。
+            <a href="https://platform.openai.com/api-keys" target="_blank">获取API Key</a>
+          </small>
+        </div>
+
+        <div class="setting-item">
+          <label>使用说明:</label>
+          <div class="help-content">
+            <p>1. 设置您的OpenAI API Key</p>
+            <p>2. 在网页中选中文本</p>
+            <p>3. 点击"✨ AI Search"按钮</p>
+            <p>4. 在此查看结果并继续提问</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部信息 -->
+    <div class="footer">
+      <p>powered by OpenAI GPT-4o</p>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html> 

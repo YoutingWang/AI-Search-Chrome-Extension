@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "AI网页内容解读助手",
+  "version": "1.0.0",
+  "description": "选中任意网页内容，一键获得AI智能解读和分析",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": false
+    }
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "action": {
+    "default_popup": "popup.html",
+            "default_title": "AI Search"
+  },
+  
+  "host_permissions": [
+    "https://api.openai.com/*"
+  ]
+} 
